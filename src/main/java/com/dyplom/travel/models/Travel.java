@@ -1,21 +1,19 @@
 package com.dyplom.travel.models;
 
 import com.dyplom.travel.models.hotel.Hotel;
-import com.dyplom.travel.models.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "trips")
-public class Trip extends BaseEntity {
-    @Basic
-    private String location;
+@Table(name = "travels")
+public class Travel extends BaseEntity {
     @Basic
     private LocalDate start;
     @Basic
@@ -27,12 +25,17 @@ public class Trip extends BaseEntity {
     @Basic
     private String city;
     @Basic
-    private int passengerCount;
+    private String country;
+    @Basic
+    private String name;
+    @Basic
+    private String description;
+    @Column(name = "country_photo")
+    private String countryPhoto;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private User owner;
-    @ManyToOne
-    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
-    private Hotel hotel;
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.REMOVE)
+    private List<TripTicket> tripTickets;
+
+    @Transient
+    private List<Hotel> hotels;
 }

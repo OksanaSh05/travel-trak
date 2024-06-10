@@ -18,8 +18,8 @@ public class UserController {
     private final UserService service;
 
     @PostMapping(value = "/login")
-    public ResponseEntity<ResponseUserDto> login(@RequestParam String username,
-                                                 @RequestParam String password) {
+    public ResponseEntity<ResponseUserDto> login(@RequestParam(name = "username") String username,
+                                                 @RequestParam(name = "password") String password) {
         return ResponseEntity.ok(service.login(username, password));
     }
 

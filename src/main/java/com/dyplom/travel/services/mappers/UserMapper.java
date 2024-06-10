@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    User asUser(String username, String password);
+    User asUser(String username, String password, String phone);
 
     ResponseUserDto asResponse(User user);
 }

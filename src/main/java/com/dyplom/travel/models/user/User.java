@@ -1,7 +1,7 @@
 package com.dyplom.travel.models.user;
 
 import com.dyplom.travel.models.BaseEntity;
-import com.dyplom.travel.models.Trip;
+import com.dyplom.travel.models.TripTicket;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -31,10 +31,10 @@ public class User extends BaseEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private UserRole role;
+    private UserRole role = UserRole.ROLE_USER;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
-    private List<Trip> trips;
+    private List<TripTicket> tripTickets;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -48,7 +48,7 @@ public class UserService extends BasePersistenceService<User> {
         if (repository.findByUsername(request.getUsername()) != null) {
             throw new UserExistsException(USERNAME_ALREADY_EXISTS);
         }
-        User savedUser = save(mapper.asUser(request.getUsername(), password));
+        User savedUser = save(mapper.asUser(request.getUsername(), password, request.getPhone()));
         ResponseUserDto convertedUser = mapper.asResponse(savedUser);
         return populateWithToken(convertedUser);
     }

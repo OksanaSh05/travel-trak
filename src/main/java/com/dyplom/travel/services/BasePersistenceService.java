@@ -20,8 +20,14 @@ public abstract class BasePersistenceService<T extends BaseEntity> {
         return getRepository().findById(id).orElse(null);
     }
 
+    @Transactional
     public T update(T entity) {
         return getRepository().save(entity);
+    }
+
+    @Transactional
+    public void delete(T entity) {
+        getRepository().delete(entity);
     }
 
     @Transactional
