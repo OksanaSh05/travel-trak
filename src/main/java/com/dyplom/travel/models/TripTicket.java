@@ -3,6 +3,7 @@ package com.dyplom.travel.models;
 import com.dyplom.travel.models.hotel.Hotel;
 import com.dyplom.travel.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class TripTicket extends BaseEntity {
     @Column(name = "three_bedrooms_count")
     private int threeBedroomCount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;

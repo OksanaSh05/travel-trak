@@ -32,7 +32,8 @@ public class TripTicketService extends BasePersistenceService<TripTicket> {
         tripTicket.setPassengerCount(request.getPassengerCount());
         tripTicket.setOwner(userService.getExistent(request.getUserId()));
         tripTicket.setTravel(travelService.getExistent(request.getTravelId()));
-        hotelService.updateHotelBedrooms(hotel, request.getSelectedRooms());
+        hotelService.updateHotelBedrooms(hotel, request.getSelectedRooms(), tripTicket);
+        save(tripTicket);
     }
 
     @Transactional
@@ -43,7 +44,7 @@ public class TripTicketService extends BasePersistenceService<TripTicket> {
         roomToFree.put(ONE_BEDROOMS, -existent.getOneBedroomCount());
         roomToFree.put(TWO_BEDROOMS, -existent.getTwoBedroomCount());
         roomToFree.put(THREE_BEDROOMS, -existent.getThreeBedroomCount());
-        hotelService.updateHotelBedrooms(existent.getHotel(), roomToFree);
+        hotelService.updateHotelBedrooms(existent.getHotel(), roomToFree, existent);
         delete(existent);
     }
 
